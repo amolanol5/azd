@@ -1,0 +1,14 @@
+parameters:
+  - name: test
+    type: string
+
+stages:
+  - stage: stage
+    displayName: stage
+    jobs:
+      - job: job
+        displayName: job
+        steps:
+          - script: |
+              ls
+
