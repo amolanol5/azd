@@ -1,6 +1,7 @@
 parameters:
   - name: test
     type: string
+    default: test
 
 stages:
   - stage: stage
