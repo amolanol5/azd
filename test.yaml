@@ -1,8 +1,7 @@
 parameters:
   - name: test
     type: string
+    default: test
 
 stages:
   - template: stages/set-users.yaml
-    parameters:
-      stage: ${{ paramter.test }}
