@@ -15,7 +15,7 @@ stages:
     jobs:
       - deployment: ${{ parameters.stage }}
         displayName: ${{ parameters.stage }}
-        environment: DEV
+        environment: ${{ parameters.stage }}
         strategy:
           runOnce:
             deploy:
