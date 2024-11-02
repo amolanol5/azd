@@ -4,12 +4,29 @@ parameters:
     default: test
 
 stages:
-  - stage: stage
-    displayName: stage
+  - stage: Delete_Cognito_User${{ parameters.stage }}
+    displayName: Delete Cognito User ${{ parameters.stage }}
+    # variables:
+    #   - name: deploymentName
+    #     value: ${{ replace(parameters['variableGroup'],'-','_') }}
+    #   - group: ${{ parameters.commonsVariableGroup }}
+    #   - group: ${{ parameters.variableGroup }}
     jobs:
-      - job: job
-        displayName: job
-        steps:
-          - script: |
-              ls
+      - deployment: ${{ variables.deploymentName }}
+        displayName: ${{ parameters.variableGroup }}
+        environment: ${{ parameters.stage }}
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                - checkout: templates
 
+                - task: Bash@3
+                  displayName: Delete User
+                  inputs:
+                    targetType: filePath
+                    filePath: azp/scripts/cognito/delete-user-cognito.sh
+                  env:
+                    POOL_ID: $(POOL_ID)
+                    USERNAME: $(USERNAME)

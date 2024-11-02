@@ -2,6 +2,11 @@ parameters:
   - name: test
     type: string
     default: test
+  - name: deployConfig
+    type: object
 
 stages:
-  - template: stages/set-users.yaml
+  - ${{ each deployConfig in parameters.deployConfig }}:
+      - template: stages/set-users.yaml
+        parameters:
+          stage: ${{ deployConfig.stage }}
