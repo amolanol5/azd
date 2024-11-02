@@ -23,10 +23,6 @@ stages:
                 - checkout: self
                 - checkout: azd
 
-                - script: |
-                    ls
-                    ls azd
-
                 - task: Bash@3
                   displayName: Delete User
                   inputs:
