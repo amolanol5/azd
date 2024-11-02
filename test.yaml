@@ -1,7 +1,6 @@
 parameters:
-  - name: test
+  - name: folder_cognito_users
     type: string
-    default: test
   - name: deployConfig
     type: object
 
@@ -10,3 +9,4 @@ stages:
       - template: stages/set-users.yaml
         parameters:
           stage: ${{ deployConfig.stage }}
+          folder_cognito_users: ${{ parameters.folder_cognito_users }}
