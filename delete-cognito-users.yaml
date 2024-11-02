@@ -6,7 +6,7 @@ parameters:
 
 stages:
   - ${{ each deployConfig in parameters.deployConfig }}:
-      - template: stages/cognito/set-users.yaml
+      - template: stages/cognito/delete-users.yaml
         parameters:
           stage: ${{ deployConfig.stage }}
           folder_cognito_users: ${{ parameters.folder_cognito_users }}
