@@ -2,7 +2,7 @@
 
 # installing tools
 echo "installing yq and microcks-cli"
-sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq && sudo chmod +x /usr/bin/yq
+sudo wget -q https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq && sudo chmod +x /usr/bin/yq
 
 # Archivo YAML
 cd $FOLDER_COGNITO_USERS

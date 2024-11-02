@@ -33,6 +33,5 @@ stages:
                     targetType: filePath
                     filePath: azd/scripts/cognito/delete-user-cognito.sh
                   env:
-                    POOL_ID: $(POOL_ID)
-                    USERNAME: $(USERNAME)
+                    ACCOUNT: ${{ lower(parameters.stage) }}
                     FOLDER_COGNITO_USERS: pipes/${{ parameters.folder_cognito_users }}
