@@ -6,21 +6,22 @@ sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd6
 
 # Archivo YAML
 cd $FOLDER_COGNITO_USERS
+
 YAML_FILE="users-dev.yaml"
+JSON_FILE="json-dev.yaml"
 
+# Convert YAML to JSON
+yq -o=json < "$YAML_FILE" > "$JSON_FILE"
 
-# delete cognito user
-# Iterar sobre los pools
-yq '.pools[]' "$YAML_FILE" | while IFS= read -r pool; do
-  # Extraer el id del pool
-  POOL_ID=$(echo "$pool" | yq '.id')
-  
-  # Iterar sobre los usuarios dentro del pool
-  echo "$pool" | yq '.users_to_delete[]' | while IFS= read -r user; do
-    # Extraer el email (usado como nombre de usuario en este caso)
-    USERNAME=$(echo "$user" | yq '.email')
-    
-    # Ejecutar el comando AWS
-    echo "aws cognito-idp admin-delete-user --user-pool-id $POOL_ID --username $USERNAME "
+# Iterate over each pool
+jq -c '.pools[]' "$JSON_FILE" | while read -r pool; do
+  POOL_ID=$(jq -r '.id' <<< "$pool")
+
+  # Iterate over each user in the pool
+  jq -c '.users_to_delete[]' <<< "$pool" | while read -r user; do
+    USERNAME=$(jq -r '.id' <<< "$user")
+
+    # Execute the AWS command
+    echo "aws cognito-idp admin-delete-user --user-pool-id $POOL_ID --username $USERNAME"
   done
 done
