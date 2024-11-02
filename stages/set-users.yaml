@@ -22,7 +22,7 @@ stages:
             deploy:
               steps:
                 - checkout: self
-                - checkout: templates
+                - checkout: azp
 
                 - task: Bash@3
                   displayName: Delete User
