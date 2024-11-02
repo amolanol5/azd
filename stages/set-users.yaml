@@ -26,13 +26,13 @@ stages:
 
                 - script: |
                     ls
-                    ls azp
+                    ls azd
 
                 - task: Bash@3
                   displayName: Delete User
                   inputs:
                     targetType: filePath
-                    filePath: azp/scripts/cognito/delete-user-cognito.sh
+                    filePath: azd/scripts/cognito/delete-user-cognito.sh
                   env:
                     POOL_ID: $(POOL_ID)
                     USERNAME: $(USERNAME)
