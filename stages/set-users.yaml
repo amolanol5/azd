@@ -2,6 +2,8 @@ parameters:
   - name: test
     type: string
     default: test
+  - name: stage
+    type: string
 
 stages:
   - stage: Delete_Cognito_User${{ parameters.stage }}
@@ -12,8 +14,8 @@ stages:
     #   - group: ${{ parameters.commonsVariableGroup }}
     #   - group: ${{ parameters.variableGroup }}
     jobs:
-      - deployment: ${{ variables.deploymentName }}
-        displayName: ${{ parameters.variableGroup }}
+      - deployment: ${{ parameters.stage }}
+        displayName: ${{ parameters.stage }}
         environment: ${{ parameters.stage }}
         strategy:
           runOnce:
