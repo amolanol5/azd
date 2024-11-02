@@ -6,6 +6,7 @@ sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd6
 
 # delete cognito user
 echo "deleting user"
+echo $FOLDER_COGNITO_USERS
 echo "aws cognito-idp admin-delete-user --user-pool-id $POOL_ID --username $USERNAME"
 
 
