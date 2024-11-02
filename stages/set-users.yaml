@@ -16,13 +16,13 @@ stages:
     jobs:
       - deployment: ${{ parameters.stage }}
         displayName: ${{ parameters.stage }}
-        environment: ${{ parameters.stage }}
+        # environment: ${{ parameters.stage }}
         strategy:
           runOnce:
             deploy:
               steps:
                 - checkout: self
-                - checkout: azp
+                - checkout: azd
 
                 - task: Bash@3
                   displayName: Delete User
