@@ -13,8 +13,8 @@ stages:
     #   - group: ${{ parameters.commonsVariableGroup }}
     #   - group: ${{ parameters.variableGroup }}
     jobs:
-      - deployment: ${{ parameters.stage }}
-        displayName: ${{ parameters.stage }}
+      - deployment: Deleting_Cognito_users_${{ parameters.stage }}
+        displayName: Deleting Cognito Users ${{ parameters.stage }}
         environment: ${{ parameters.stage }}
         strategy:
           runOnce:
