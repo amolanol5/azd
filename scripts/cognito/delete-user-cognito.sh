@@ -26,7 +26,7 @@ jq -c '.pools[]' "$JSON_FILE" | while read -r pool; do
 
     if [ $? -eq 0 ]; then
       # Si el usuario existe, eliminarlo
-      aws cognito-idp admin-delete-user --user-pool-id "$POOL_ID" --username "$USERNAME"
+      echo "aws cognito-idp admin-delete-user --user-pool-id "$POOL_ID" --username "$USERNAME""
       echo "Usuario $USERNAME eliminado del pool $POOL_ID"
     else
       # Si el usuario no existe, registrar en el log
