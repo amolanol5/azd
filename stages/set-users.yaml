@@ -35,4 +35,4 @@ stages:
                   env:
                     POOL_ID: $(POOL_ID)
                     USERNAME: $(USERNAME)
-                    FOLDER_COGNITO_USERS: ${{ parameters.folder_cognito_users }}
+                    FOLDER_COGNITO_USERS: pipes/${{ parameters.folder_cognito_users }}
