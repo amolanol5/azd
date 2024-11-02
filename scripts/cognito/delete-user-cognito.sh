@@ -7,8 +7,8 @@ sudo wget -q https://github.com/mikefarah/yq/releases/latest/download/yq_linux_a
 # Archivo YAML
 cd $FOLDER_COGNITO_USERS
 
-YAML_FILE="users-dev.yaml"
-JSON_FILE="json-dev.yaml"
+YAML_FILE="users-$ACCOUNT.yaml"
+JSON_FILE="json-$ACCOUNT.yaml"
 
 # Convert YAML to JSON
 yq -o=json < "$YAML_FILE" > "$JSON_FILE"
