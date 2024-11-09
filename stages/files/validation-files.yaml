@@ -21,8 +21,7 @@ stages:
           - script: |
               echo "Validando archivos modificados..."
               # Obtener los archivos modificados en el último commit
-              which git
-              git diff-tree --no-commit-id --name-only -r HEAD
+              git diff-tree  HEAD
               MODIFIED_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD)
               echo $MODIFIED_FILES
               
