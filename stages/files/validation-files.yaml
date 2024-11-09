@@ -17,6 +17,7 @@ stages:
           value: cognito-delete-users        
         steps:
           - checkout: self
+            fetchDepth: 2
           - checkout: azd
 
           - script: |
