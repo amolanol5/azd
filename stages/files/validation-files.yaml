@@ -18,14 +18,11 @@ stages:
         steps:
           - checkout: self
           - script: |
-              #!/bin/bash
-              git diff-tree --no-commit-id --name-only -r "HEAD" > files.txt
+              git diff-tree HEAD
+              git diff-tree --no-commit-id --name-only -r HEAD > files.txt
               cat files.txt
 
           - script: |
-              #!/bin/bash
-              
-              # Validar si algún archivo específico fue modificado (por ejemplo, archivos en la carpeta src)
               if cat files.txt | grep -q "^$FOLDER/users-prod.yaml"; then
                 echo "Se detectaron cambios en archivos relevantes."
                 echo "##vso[task.setvariable variable=changesDetected]true"
