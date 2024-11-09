@@ -21,11 +21,11 @@ stages:
           - script: |
               echo "Validando archivos modificados..."
               # Obtener los archivos modificados en el último commit
-              MODIFIED_FILES=$(git diff-tree --no-commit-id --name-only -r "HEAD")
-              echo $MODIFIED_FILES
+              git diff-tree --no-commit-id --name-only -r HEAD > files.txt
+              cat files.txt
               
               # Validar si algún archivo específico fue modificado (por ejemplo, archivos en la carpeta src)
-              if echo "$MODIFIED_FILES" | grep -q "^$FOLDER/users-prod.yaml"; then
+              if cat files.txt | grep -q "^$FOLDER/users-prod.yaml"; then
                 echo "Se detectaron cambios en archivos relevantes."
                 echo "##vso[task.setvariable variable=changesDetected]true"
               else
