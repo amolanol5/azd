@@ -4,6 +4,9 @@ parameters:
   - name: stage
     type: string
 
+variables:
+  - name: FOLDER
+    value: {{ parameters.folder_cognito_users }} 
 
 stages:
   # Primer Stage para validar los cambios
@@ -26,9 +29,7 @@ stages:
               else
                 echo "No se detectaron cambios relevantes."
                 echo "##vso[task.setvariable variable=changesDetected]false"
-          displayName: "Ejecutar validación de archivos"
 
-  # Stage Condicional que depende del resultado de la validación
   - stage: ConditionalStage
     dependsOn: ValidationStage
     condition: eq(dependencies.ValidationStage.outputs['ValidateChanges.changesDetected'], 'true')
