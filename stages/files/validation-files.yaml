@@ -17,8 +17,6 @@ stages:
           value: cognito-delete-users        
         steps:
           - checkout: self
-          - script: |
-
 
           - script: |
               echo "Validando archivos modificados..."
