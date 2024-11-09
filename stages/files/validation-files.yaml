@@ -20,7 +20,7 @@ stages:
                    
         steps:
           - checkout: self
-            fetchDepth: 2
+            fetchDepth: 5
           - checkout: azd
 
           - script: |
