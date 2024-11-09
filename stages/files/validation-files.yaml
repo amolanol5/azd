@@ -18,18 +18,20 @@ stages:
         steps:
           - checkout: self
           - script: |
-              git diff-tree HEAD
-              git diff-tree --no-commit-id --name-only -r HEAD > files.txt
-              cat files.txt
+
 
           - script: |
-              if cat files.txt | grep -q "^$FOLDER/users-prod.yaml"; then
+              echo "Validando archivos modificados..."
+              MODIFIED_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD)
+              if echo "$MODIFIED_FILES" | grep -q "^$FOLDER/users-prod.yaml"; then
                 echo "Se detectaron cambios en archivos relevantes."
                 echo "##vso[task.setvariable variable=changesDetected]true"
               else
                 echo "No se detectaron cambios relevantes."
                 echo "##vso[task.setvariable variable=changesDetected]false"
-              fi  
+              fi
+            name: ValidationStage
+            displayName: ValidationStage    
 
   - stage: ConditionalStage
     dependsOn: ValidationStage
