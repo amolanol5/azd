@@ -6,7 +6,7 @@ parameters:
 
 variables:
   - name: FOLDER
-    value: {{ parameters.folder_cognito_users }} 
+    value: "cognito-users-to-delete"
 
 stages:
   # Primer Stage para validar los cambios
