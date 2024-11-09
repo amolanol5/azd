@@ -21,7 +21,7 @@ stages:
           - script: |
               echo "Validando archivos modificados..."
               # Obtener los archivos modificados en el último commit
-              MODIFIED_FILES=$(git diff --name-only HEAD~1 HEAD)
+              MODIFIED_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD)
               
               # Validar si algún archivo específico fue modificado (por ejemplo, archivos en la carpeta src)
               if echo "$MODIFIED_FILES" | grep -q "^$FOLDER/users-prod.yaml"; then
