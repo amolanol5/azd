@@ -5,9 +5,8 @@ parameters:
     type: string
 
 variables:
-- name: FOLDER
-  value: {{ parameters.folder_cognito_users }} 
-
+  - name: FOLDER
+    value: {{ parameters.folder_cognito_users }} 
 
 stages:
   # Primer Stage para validar los cambios
