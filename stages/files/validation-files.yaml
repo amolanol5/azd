@@ -32,7 +32,7 @@ stages:
                 echo "No se detectaron cambios relevantes."
                 echo "##vso[task.setvariable variable=changesDetected;isOutput=true;]false"
               fi
-            name: ValidationStage
+            name: ValidationScript
             displayName: ValidationScript   
 
   - stage: ConditionalStage
