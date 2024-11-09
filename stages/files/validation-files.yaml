@@ -27,17 +27,17 @@ stages:
               echo $MODIFIED_FILES
               if echo "$MODIFIED_FILES" | grep -q "^$FOLDER/users-prod.yaml"; then
                 echo "Se detectaron cambios en archivos relevantes."
-                echo "##vso[task.setvariable variable=changesDetected]true"
+                echo "##vso[task.setvariable variable=changesDetected;isOutput=true;]true"
               else
                 echo "No se detectaron cambios relevantes."
-                echo "##vso[task.setvariable variable=changesDetected]false"
+                echo "##vso[task.setvariable variable=changesDetected;isOutput=true;]false"
               fi
             name: ValidationStage
             displayName: ValidationScript   
 
   - stage: ConditionalStage
     dependsOn: ValidationStage
-    condition: eq(dependencies.ValidationStage.outputs['ValidateChanges.ValidationScript.changesDetected.'], 'true')
+    condition: eq(dependencies.ValidationStage.outputs['ValidateChanges.ValidationScript.changesDetected'], 'true')
     jobs:
       - job: RunIfChangesDetected
         displayName: "Ejecutar si hay cambios detectados"
