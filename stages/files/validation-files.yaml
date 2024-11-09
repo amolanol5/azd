@@ -14,7 +14,8 @@ stages:
         displayName: "Validar cambios en archivos específicos"
         variables:
         - name: FOLDER
-          value: cognito-delete-users        
+          value: cognito-delete-users
+          system.debug: 'true'                
         steps:
           - checkout: self
             fetchDepth: 2
