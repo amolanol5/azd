@@ -13,8 +13,8 @@ stages:
       - job: ValidateChanges
         displayName: "Validar cambios en archivos específicos"
         variables:
-          - name: FOLDER
-            value: {{ parameters.folder_cognito_users }}         
+        - name: FOLDER
+          value: cognito-delete-users        
         steps:
           - checkout: self
           
