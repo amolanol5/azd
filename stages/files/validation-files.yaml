@@ -4,9 +4,7 @@ parameters:
   - name: stage
     type: string
 
-variables:
-  - name: FOLDER
-    value: "cognito-users-to-delete"
+
 
 stages:
   # Primer Stage para validar los cambios
@@ -14,6 +12,9 @@ stages:
     jobs:
       - job: ValidateChanges
         displayName: "Validar cambios en archivos específicos"
+        variables:
+        - name: FOLDER
+          value: {{ parameters.folder_cognito_users }} 
         steps:
           - checkout: self
           
