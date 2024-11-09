@@ -1,0 +1,43 @@
+parameters:
+  - name: folder_cognito_users
+    type: string
+  - name: stage
+    type: string
+
+variables:
+- name: FOLDER
+  value: {{ parameter.folder_cognito_users }} 
+
+
+stages:
+  # Primer Stage para validar los cambios
+  - stage: ValidationStage
+    jobs:
+      - job: ValidateChanges
+        displayName: "Validar cambios en archivos específicos"
+        steps:
+          - checkout: self
+          
+          - script: |
+              echo "Validando archivos modificados..."
+              # Obtener los archivos modificados en el último commit
+              MODIFIED_FILES=$(git diff --name-only HEAD~1 HEAD)
+              
+              # Validar si algún archivo específico fue modificado (por ejemplo, archivos en la carpeta src)
+              if echo "$MODIFIED_FILES" | grep -q "^$FOLDER/users-prod.yaml"; then
+                echo "Se detectaron cambios en archivos relevantes."
+                echo "##vso[task.setvariable variable=changesDetected]true"
+              else
+                echo "No se detectaron cambios relevantes."
+                echo "##vso[task.setvariable variable=changesDetected]false"
+          displayName: "Ejecutar validación de archivos"
+
+  # Stage Condicional que depende del resultado de la validación
+  - stage: ConditionalStage
+    dependsOn: ValidationStage
+    condition: eq(dependencies.ValidationStage.outputs['ValidateChanges.changesDetected'], 'true')
+    jobs:
+      - job: RunIfChangesDetected
+        displayName: "Ejecutar si hay cambios detectados"
+        steps:
+          - script: echo "Se han detectado cambios relevantes. Ejecutando Stage Condicional..."
