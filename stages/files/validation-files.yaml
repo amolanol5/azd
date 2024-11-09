@@ -17,8 +17,10 @@ stages:
           value: cognito-delete-users        
         steps:
           - checkout: self
+          - checkout: azd
 
           - script: |
+              cd pipes
               ls -la
               echo "Validando archivos modificados..."
               MODIFIED_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD)
