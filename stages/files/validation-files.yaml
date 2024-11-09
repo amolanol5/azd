@@ -23,6 +23,7 @@ stages:
               cd pipes
               ls -la
               echo "Validando archivos modificados..."
+              git status
               MODIFIED_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD)
               echo $MODIFIED_FILES
               if echo "$MODIFIED_FILES" | grep -q "^$FOLDER/users-prod.yaml"; then
