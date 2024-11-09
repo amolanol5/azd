@@ -19,14 +19,11 @@ stages:
           - checkout: self
           - script: |
               #!/bin/bash
-              git diff-tree --no-commit-id --name-only -r "HEAD"
+              git diff-tree --no-commit-id --name-only -r "HEAD" > files.txt
+              cat files.txt
 
           - script: |
               #!/bin/bash
-              echo "Validando archivos modificados..."
-              # Obtener los archivos modificados en el último commit
-              git diff-tree --no-commit-id --name-only -r "HEAD" > files.txt
-              cat files.txt
               
               # Validar si algún archivo específico fue modificado (por ejemplo, archivos en la carpeta src)
               if cat files.txt | grep -q "^$FOLDER/users-prod.yaml"; then
