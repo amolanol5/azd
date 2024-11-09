@@ -22,9 +22,7 @@ stages:
 
           - script: |
               cd pipes
-              ls -la
               echo "Validando archivos modificados..."
-              git status
               MODIFIED_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD)
               echo $MODIFIED_FILES
               if echo "$MODIFIED_FILES" | grep -q "^$FOLDER/users-prod.yaml"; then
@@ -35,11 +33,11 @@ stages:
                 echo "##vso[task.setvariable variable=changesDetected]false"
               fi
             name: ValidationStage
-            displayName: ValidationStage    
+            displayName: ValidationScript   
 
   - stage: ConditionalStage
     dependsOn: ValidationStage
-    condition: eq(dependencies.ValidationStage.outputs['ValidateChanges.changesDetected'], 'true')
+    condition: eq(dependencies.ValidationStage.outputs['ValidateChanges.ValidationScript.changesDetected.'], 'true')
     jobs:
       - job: RunIfChangesDetected
         displayName: "Ejecutar si hay cambios detectados"
