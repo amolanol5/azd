@@ -15,7 +15,9 @@ stages:
         variables:
         - name: FOLDER
           value: cognito-delete-users
-          system.debug: 'true'                
+        - name: system.debug
+          value: 'true'
+                   
         steps:
           - checkout: self
             fetchDepth: 2
